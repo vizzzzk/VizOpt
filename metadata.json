@@ -1,0 +1,5 @@
+{
+  "name": "VizOpt",
+  "description": "A professional paper trading and analysis dashboard for Nifty 50 options, featuring real-time Greek calculations, PCR analysis, and portfolio tracking.",
+  "requestFramePermissions": []
+}
