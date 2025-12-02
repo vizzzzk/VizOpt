@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VizBuck</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Urbanist"', 'sans-serif'],
+            mono: ['"Urbanist"', 'sans-serif'],
+            display: ['"Urbanist"', 'sans-serif'],
+          },
+          colors: {
+            // Dynamic Semantic Colors
+            canvas: 'var(--color-canvas)',
+            panel: 'var(--color-panel)',
+            surface: 'var(--color-surface)',
+            border: 'var(--color-border)',
+            main: 'var(--color-text-main)',
+            muted: 'var(--color-text-muted)',
+
+            // Brand Fixed Colors - New Palette
+            brand: {
+              DEFAULT: '#0177fb', // Main Brand Blue
+              hover: '#0062d6',
+              glow: 'rgba(1, 119, 251, 0.3)',
+              dim: 'rgba(1, 119, 251, 0.1)'
+            },
+            accent: '#4cbee1', // Accent Blue-Teal
+
+            // Dark Bases
+            obsidian: '#111111',
+            charcoal: '#1e2345', // Lighter Navy for inputs
+
+            // Semantic Data Colors
+            positive: '#10B981', // Emerald Green for gains
+            mint: '#4cbee1', // Remapped to Accent
+            'neon-red': '#FF5252',
+            'neon-blue': '#0177fb',
+            'neon-violet': '#7C4DFF',
+            'amber-500': '#f59e0b',
+            'fuchsia-500': '#d946ef'
+          },
+          borderRadius: {
+            'xl': '0.75rem',
+            '2xl': '1rem',
+            '3xl': '1.5rem',
+            '4xl': '2rem',
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    :root {
+      /* Dark Theme (Default) - Deep Navy Palette */
+      --color-canvas: #111111;
+      --color-panel: #131635;
+      /* Deep Navy */
+      --color-surface: #1C2142;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-text-main: #ffffff;
+      --color-text-muted: #b5b9c4;
+      /* Light Gray-Blue */
+    }
+
+    [data-theme='light'] {
+      --color-canvas: #ebf0f6;
+      --color-panel: #ffffff;
+      --color-surface: #f4f7fa;
+      --color-border: #e2e8f0;
+      --color-text-main: #131635;
+      --color-text-muted: #64748B;
+    }
+
+    body {
+      background-color: var(--color-canvas);
+      color: var(--color-text-main);
+      font-family: 'Urbanist', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-surface);
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-text-muted);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .animate-shimmer {
+      animation: shimmer 3s infinite linear;
+    }
+
+    .glass-panel {
+      background: var(--color-panel);
+      border: 1px solid var(--color-border);
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Terminal Aesthetics - Now Urbanist */
+    .font-terminal {
+      font-family: 'Urbanist', sans-serif !important;
+      letter-spacing: 0em;
+    }
+
+    input,
+    select,
+    textarea {
+      border-radius: 1rem;
+      /* Rounded 2xl default */
+    }
+
+    /* Hide Arrows/Spinners in Number Inputs */
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+  <!-- XLSX Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "vite": "https://aistudiocdn.com/vite@^7.2.6",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
